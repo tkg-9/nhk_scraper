@@ -1,0 +1,39 @@
+<div class="top-area">
+  <h1 class="page-title">スクレイピングアプリケーション</h1>
+
+  <div class="form-area">
+    <%= form_with url: '/news/scrape', method: :post, local: true do %>
+      <%= text_field_tag :url, '', placeholder: "スクレイピングするURLを入力", class: "url-input" %>
+      <%= submit_tag '実行', class: "submit-button" %>
+    <% end %>
+  </div>
+</div>
+
+<% if @history.present? %>
+  <table class="result-table">
+    <colgroup>
+      <col style="width: 25%;">
+      <col style="width: 10%;">
+      <col style="width: 65%;">
+    </colgroup> 
+    
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>日時</th>
+        <th>本文</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @history.each do |article| %>
+        <tr>
+          <td><%= article[:title] %></td>
+          <td><%= article[:date] %></td>
+          <td>
+           <%= raw article[:body] %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
