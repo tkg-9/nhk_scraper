@@ -5,7 +5,7 @@ require 'openssl'
 class NewsController < ApplicationController
 
   def index
-    @artcles=
+    @articles=
   Article.order(created_at: :desc).limit(5)  
   end
 
