@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<% if @history.present? %>
+<% if @articles.present? %>
   <table class="result-table">
     <colgroup>
       <col style="width: 25%;">
@@ -25,13 +25,11 @@
       </tr>
     </thead>
     <tbody>
-      <% @history.each do |article| %>
+      <% @articles.each do |article| %>
         <tr>
-          <td><%= article[:title] %></td>
-          <td><%= article[:date] %></td>
-          <td>
-           <%= raw article[:body] %>
-          </td>
+          <td><%= article.title %></td>
+          <td><%= article.date %></td>
+          <td><%= raw article.body %></td>
         </tr>
       <% end %>
     </tbody>

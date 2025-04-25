@@ -3,11 +3,10 @@ require 'nokogiri'
 require 'openssl'
 
 class NewsController < ApplicationController
-  skip_forgery_protection
-
 
   def index
-    @history = session[:history]   
+    @artcles=
+  Article.order(created_at: :desc).limit(5)  
   end
 
 
@@ -31,10 +30,7 @@ class NewsController < ApplicationController
         date: doc.at_css('time')&.text&.strip,
         body: [summary_html, body_html].compact.join('<br><br>')
       }
-  
-      history = session[:history] || []
-      history.unshift(scraped_article)
-      session[:history] = history.first(5)
+      Article.create(scraped_article)
   
     rescue => e
       logger.error 
